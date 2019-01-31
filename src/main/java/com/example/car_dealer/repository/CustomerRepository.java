@@ -9,7 +9,8 @@ import java.util.Optional;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
-   Optional< Customer> findByPeselEquals(String peselNumber);
+
+   Optional< Customer> findByPesel(String peselNumber);
 
 
 }

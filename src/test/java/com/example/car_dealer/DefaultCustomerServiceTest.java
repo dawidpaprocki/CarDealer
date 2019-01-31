@@ -40,7 +40,7 @@ public class DefaultCustomerServiceTest {
         testCustomer.setId(2L);
 
 
-        when(customerRepository.findByPeselEquals(any())).thenReturn(Optional.of(customer));
+        when(customerRepository.findByPesel(any())).thenReturn(Optional.of(customer));
 
         Boolean isCustomerSaved = defaultCustomerService.customerValidate(testCustomer);
         assertFalse(isCustomerSaved);
@@ -54,9 +54,9 @@ public class DefaultCustomerServiceTest {
         testCustomer.setPesel("1234567");
         testCustomer.setId(2L);
 
-        when(customerRepository.findByPeselEquals(any())).thenReturn(Optional.of(customer));
+        when(customerRepository.findByPesel(any())).thenReturn(Optional.of(customer));
         Boolean isCustomerSaved = defaultCustomerService.customerValidate(testCustomer);
-        assertTrue(isCustomerSaved);
+        assertFalse(isCustomerSaved);
 
     }
 
