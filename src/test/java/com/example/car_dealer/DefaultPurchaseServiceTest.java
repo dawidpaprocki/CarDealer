@@ -37,7 +37,6 @@ public class DefaultPurchaseServiceTest {
     private Buy buy;
 
 
-    @Test
     @Before
     public void before() {
         carRepository = mock(CarRepository.class);
