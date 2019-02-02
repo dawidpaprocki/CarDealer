@@ -82,53 +82,27 @@ public class DefaultWorkerServiceTest {
         Boolean isWorkerDeleted = defaultWorkerService.deleteWorkerFromDB(workerTest);
 
         assertTrue(isWorkerDeleted);
-
     }
 
 
     @Test
     public void updateWorkerFromDBTestFalse(){
 
-        worker.setName("Worker");
-        worker.setSurName("Worker Sur");
-
-        workerTest.setName("Changed Name");
-        workerTest.setSurName("Changed Sur");
-
         when(workerRepository.findById(any()))
                 .thenReturn(Optional.ofNullable(null));
 
-        defaultWorkerService.updateWorkerFromDB(workerTest);
+        assertFalse(defaultWorkerService.updateWorkerFromDB(worker));
 
-        ArgumentCaptor<Worker> workerArgumentCaptor = ArgumentCaptor.forClass(Worker.class);
-
-        verify(workerRepository).save(workerArgumentCaptor.capture());
-
-
-        assertNotEquals("Changed Name",workerArgumentCaptor.getValue().getName());
-        assertNotEquals("Changed Sur",workerArgumentCaptor.getValue().getSurName());
     }
 
     @Test
     public void updateWorkerFromDBTestTrue(){
 
-        worker.setName("Worker Name");
-        worker.setSurName("Worker Sur");
-
-        workerTest.setName("Changed Name");
-        workerTest.setSurName("Changed Sur");
-
         when(workerRepository.findById(any()))
                 .thenReturn(Optional.of(worker));
 
-        defaultWorkerService.updateWorkerFromDB(workerTest);
+        assertTrue(defaultWorkerService.updateWorkerFromDB(worker));
 
-        ArgumentCaptor<Worker> workerArgumentCaptor = ArgumentCaptor.forClass(Worker.class);
-
-        verify(workerRepository).save(workerArgumentCaptor.capture());
-
-        assertEquals("Changed Name",workerArgumentCaptor.getValue().getName());
-        assertEquals("Changed Sur",workerArgumentCaptor.getValue().getSurName());
     }
 
 
