@@ -28,6 +28,3 @@ public class DefaultCustomerService implements CustomerService {
 
     }
 }
-
-//        String string = carArgumentCaptorSell.getValue().getDate().toString();
-//        Date parsedDate1 = simpleDateFormat.parse(string);
