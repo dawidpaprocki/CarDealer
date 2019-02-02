@@ -28,17 +28,11 @@ public class DefaultCustomerServiceTest {
         customerRepository = mock(CustomerRepository.class);
         defaultCustomerService = new DefaultCustomerService(customerRepository);
         customer = new Customer();
-        customer.setPesel("123456");
-        customer.setId(1L);
-
-    }
+     }
 
     @Test
     public void customerValidateFalse(){
         Customer testCustomer = new Customer();
-        testCustomer.setPesel("123456");
-        testCustomer.setId(2L);
-
 
         when(customerRepository.findByPesel(any())).thenReturn(Optional.of(customer));
 
@@ -51,12 +45,12 @@ public class DefaultCustomerServiceTest {
     @Test
     public void customerValidateTrue(){
         Customer testCustomer = new Customer();
-        testCustomer.setPesel("1234567");
-        testCustomer.setId(2L);
 
-        when(customerRepository.findByPesel(any())).thenReturn(Optional.of(customer));
+        when(customerRepository.findByPesel(any())).thenReturn(Optional.ofNullable(null));
+
         Boolean isCustomerSaved = defaultCustomerService.customerValidate(testCustomer);
-        assertFalse(isCustomerSaved);
+
+        assertTrue(isCustomerSaved);
 
     }
 

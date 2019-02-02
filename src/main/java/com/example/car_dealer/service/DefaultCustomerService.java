@@ -17,7 +17,8 @@ public class DefaultCustomerService implements CustomerService {
     @Override
     public Boolean customerValidate(Customer customer) {
         String customerPesel = customer.getPesel();
-            Optional<Customer> c = customerRepository.findByPesel(customerPesel);
+        Optional<Customer> c = customerRepository.findByPesel(customerPesel);
+
         if (!c.isPresent()) {
             customerRepository.save(customer);
             return true;
