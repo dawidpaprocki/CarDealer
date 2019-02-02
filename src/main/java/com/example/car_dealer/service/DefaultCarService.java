@@ -19,12 +19,16 @@ public class DefaultCarService implements CarService {
 
 
     private Boolean checkIfPresent(Car car){
-        Optional<Car> foundedCar = carRepository.findById(car.getId());
+        Optional<Car> foundCar = carRepository.findById(car.getId());
 
-        return foundedCar.isPresent();
+        return foundCar.isPresent();
     }
 
 
+    @Override
+    public Optional<Car> getCarById(Long carId) {
+       return carRepository.findById(carId);
+    }
 
     @Override
     public Boolean addCarToDB(Car car) {

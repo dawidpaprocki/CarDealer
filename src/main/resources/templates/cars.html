@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cars</title>
+</head>
+<body>
+<h1>Cars</h1>
+<table>
+
+
+    <tr>
+        <th>ID</th>
+        <th>Date</th>
+        <th>Model</th>
+        <th>Assistant</th>
+        <th>Register number</th>
+        <th>Fuel type</th>
+        <th>Mileage</th>
+        <th>Engine</th>
+        <th>Horse power</th>
+        <th>Gear box</th>
+        <th>Description</th>
+        <th>Amount of test drives</th>
+        <th>Owner</th>
+    </tr>
+     <tr th:each="car : ${carList}">
+        <td th:text="${car.id}"></td>
+        <td th:text="${car.date}"></td>
+        <td th:text="${car.model}"></td>
+        <td th:text="${car.nrOc}"></td>
+        <td th:text="${car.nrRegister}"></td>
+        <td th:text="${car.fuelType}"></td>
+        <td th:text="${car.mileage}"></td>
+        <td th:text="${car.engine}"></td>
+        <td th:text="${car.power}"></td>
+        <td th:text="${car.gearBox}"></td>
+        <td th:text="${car.description}"></td>
+        <td th:text="${car.testDriveAmount}"></td>
+        <td th:text="${car.owner}"></td>
+         <td>
+             <a th:href="@{/cars/{id}(id=${car.id})}"
+                th:text="Details"/></td>
+
+    </tr>
+</table>
+</body>
+</html>
