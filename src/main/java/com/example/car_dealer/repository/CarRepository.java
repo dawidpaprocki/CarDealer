@@ -18,7 +18,6 @@ public interface CarRepository extends JpaRepository<Car,Long> {
     @Query("FROM Car Where Sold = 1")
     List <Car> findAllIsSold();
 
-    List <Car> findAllByModelIs(String Model);
 
     @Query("FROM Car c Where c.date >= :afterDate and c.date <= :beforeDate")
     List <Car> findAllBetweenDates(@Param ("afterDate") Date afterDate,@Param ("beforeDate")  Date beforeDate);

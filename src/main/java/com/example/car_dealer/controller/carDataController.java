@@ -1,5 +1,6 @@
 package com.example.car_dealer.controller;
 
+import com.example.car_dealer.model.Buy;
 import com.example.car_dealer.model.Car;
 import com.example.car_dealer.service.CarService;
 import com.example.car_dealer.service.PurchaseService;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/cars")
@@ -47,6 +49,17 @@ public class CarDataController {
             model.addAttribute("car", foundCar.get());
         }
         return "carDetails";
+    }
+
+    @RequestMapping("/waitingCars")
+    public String waitingCars(Model model){
+        List<Buy> buysToAccept = purchaseService.carWaitingForAccept();
+        List<Car> waitingCarsList = buysToAccept.stream().map(Buy::getCar).collect(Collectors.toList());
+        model.addAttribute("waitingBuyList",buysToAccept);
+        model.addAttribute("waitingCarList",waitingCarsList);
+
+        return "waitingCars";
+
     }
 
 }

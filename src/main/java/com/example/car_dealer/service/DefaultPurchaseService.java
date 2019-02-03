@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class DefaultPurchaseService implements PurchaseService {
@@ -35,7 +36,12 @@ public class DefaultPurchaseService implements PurchaseService {
     }
 
     @Override
-    public Buy carStatus(Long buyId, Long buyStatus) {
+    public List<Buy> carWaitingForAccept() {
+        return buyRepository.findByAcceptStatus(0);
+    }
+
+    @Override
+    public Buy changeCarStatus(Long buyId, Long buyStatus) {
         Buy carForBuy = buyRepository.findById(buyId).get();
         Long carId = carForBuy.getCar().getId();
         if (buyStatus>0){
