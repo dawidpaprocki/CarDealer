@@ -24,6 +24,6 @@ public class Buy extends BaseModel {
     @ManyToOne
     @JoinColumn(name = "workerId")
     private Worker worker;
-    private Long AcceptStatus;
+    private Long acceptStatus;
 
 }

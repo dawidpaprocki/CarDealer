@@ -116,7 +116,7 @@ public class DefaultPurchaseServiceTest {
         when(buyRepository.findById(any())).thenReturn(Optional.of(buy));
         when(carRepository.findById(any())).thenReturn(Optional.of(car));
 
-        defaultPurchaseService.carStatus(1L,1L);
+        defaultPurchaseService.changeCarStatus(1L,1L);
 
         ArgumentCaptor<Buy> buyArgumentCaptorBuy = ArgumentCaptor.forClass(Buy.class);
         verify(buyRepository).save(buyArgumentCaptorBuy.capture());
@@ -132,7 +132,7 @@ public class DefaultPurchaseServiceTest {
         when(buyRepository.findById(any())).thenReturn(Optional.of(buy));
         when(carRepository.findById(any())).thenReturn(Optional.of(car));
 
-        defaultPurchaseService.carStatus(1L,0L);
+        defaultPurchaseService.changeCarStatus(1L,0L);
 
         ArgumentCaptor<Buy> buyArgumentCaptorBuy = ArgumentCaptor.forClass(Buy.class);
         verify(buyRepository).save(buyArgumentCaptorBuy.capture());
