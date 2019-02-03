@@ -19,9 +19,12 @@ public class DefaultCarService implements CarService {
 
 
     private Boolean checkIfPresent(Car car){
-        Optional<Car> foundCar = carRepository.findById(car.getId());
+        if (car.getId() != null) {
+            Optional<Car> foundCar = carRepository.findById(car.getId());
+            return foundCar.isPresent();
+        }
 
-        return foundCar.isPresent();
+        return false;
     }
 
 
@@ -33,7 +36,7 @@ public class DefaultCarService implements CarService {
     @Override
     public Boolean addCarToDB(Car car) {
 
-        if(checkIfPresent(car)){
+        if(!checkIfPresent(car)){
             carRepository.save(car);
             return true;
         }else {

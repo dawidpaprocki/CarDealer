@@ -2,6 +2,7 @@ package com.example.car_dealer.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -13,6 +14,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 public class Sell extends BaseModel {
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
     private BigDecimal amount;
     @ManyToOne
@@ -25,6 +27,4 @@ public class Sell extends BaseModel {
     @JoinColumn(name = "workerId")
     private Worker worker;
     private Long AcceptStatus;
-
-
 }

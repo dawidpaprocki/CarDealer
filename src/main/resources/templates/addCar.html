@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add car</title>
+</head>
+
+<body>
+<h1>Add car</h1>
+
+<form th:action="@{/buyCar/addCar}" th:object="${car}" method="post">
+    <table>
+        <tr>
+            <td>Model</td>
+            <td>
+                <input type="text" th:field="*{model}">
+
+            </td>
+        </tr>
+        <tr>
+            <td>Production Date</td>
+            <td>
+                <input type="date" th:field="*{date}">
+
+            </td>
+        </tr>
+        <tr>
+            <td>Nr Oc</td>
+            <td>
+                <input type="text" th:field="*{nrOc}">
+
+            </td>
+        <tr>
+
+        <tr>
+            <td>Register Number</td>
+            <td>
+                <input type="text" th:field="*{nrRegister}">
+
+            </td>
+        <tr>
+        <tr>
+            <td>Fuel</td>
+            <td>
+                <input type="text" th:field="*{fuelType}">
+
+            </td>
+        <tr>
+        <tr>
+            <td>Mileage</td>
+            <td>
+                <input type="text" th:field="*{mileage}">
+
+            </td>
+        <tr>
+        <tr>
+            <td>Engine type</td>
+            <td>
+                <input type="text" th:field="*{engine}">
+
+            </td>
+        <tr>
+        <tr>
+            <td>Engine Power</td>
+            <td>
+                <input type="text" th:field="*{power}">
+
+            </td>
+        <tr>
+        <tr>
+            <td>Gear Box</td>
+            <td>
+                <input type="text" th:field="*{gearBox}">
+
+            </td>
+        <tr>
+        <tr>
+            <td>Description</td>
+            <td>
+                <input type="text" th:field="*{description}">
+
+            </td>
+        <tr>
+        <tr>
+            <td colspan="2"><input type="submit"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

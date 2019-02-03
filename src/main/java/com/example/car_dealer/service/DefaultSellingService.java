@@ -51,7 +51,6 @@ public class DefaultSellingService  implements SellingService {
             car.setSold(0L);
             carRepository.save(car);
         }
-
         return sellRepository.save(carForSell);
     }
 

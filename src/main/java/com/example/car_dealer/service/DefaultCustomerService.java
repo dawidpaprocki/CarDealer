@@ -27,4 +27,14 @@ public class DefaultCustomerService implements CustomerService {
         }
 
     }
+
+    @Override
+    public void addCustomer(Customer customer) {
+        customerRepository.save(customer);
+    }
+
+    @Override
+    public Optional<Customer> getCustomerById(Long id) {
+       return customerRepository.findById(id);
+    }
 }
