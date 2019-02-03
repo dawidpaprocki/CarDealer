@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cars</title>
+</head>
+<body>
+<h1>Cars</h1>
+<table border="1">
+
+    <tr>
+        <th>ID</th>
+        <th>Date</th>
+        <th>Model</th>
+        <th>Assistant</th>
+        <th>Register number</th>
+        <th>Fuel type</th>
+        <th>Mileage</th>
+        <th>Engine</th>
+        <th>Horse power</th>
+        <th>Gear box</th>
+        <th>Description</th>
+        <th>Amount of test drives</th>
+        <th>Owner</th>
+    </tr>
+    <tr th:each="buy : ${waitingBuyList}">
+        <td th:text="${buy.date}"></td>
+        <td th:text="${buy.amount}"></td>
+        <td th:text="${buy.worker.getName()+' '+ buy.worker.getSurName()}"></td>
+        <td th:text="${buy.getCustomer().getName()+ ' ' + buy.getCustomer().surName}"></td>
+        <td th:text="${buy.getCar().getModel()}">
+        </td>
+        <td>
+            <a th:href="@{/cars/{id}(id=${buy.getCar().getId()})}" th:text="Details"/>
+        </td>
+
+    </tr>
+</table>
+</body>
+</html>
