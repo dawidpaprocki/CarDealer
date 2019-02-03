@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Buy car</title>
+</head>
+
+<body>
+<h1>Buy car</h1>
+<table>
+    <tbody>
+    <tr>
+        <a th:href="@{/buyCar/addCustomer}">Add Customer</a></td>
+    </tr>
+    <tr>
+        <td><a th:href="@{/buyCar/addCar}">Add Car </a></td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+    </tbody>
+</table>
+
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <div th:if="${carId != null}">
+                <div th:text="${model}"></div>
+            </div>
+            <div th:if="${carId == null}">
+                <div>Proszę dodać auto</div>
+            </div>
+        </td>
+        <td>
+            <div th:if="${customerId != null}">
+                <div th:text="${name}"></div>
+            </div>
+            <div th:if="${customerId == null}">
+                <div>Proszę dodać Klienta</div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div th:if="${carId != null && customerId != null}">
+                <div>Proszę Podaj Cenę zakupu</div>
+                <form th:action="@{/buyCar/bought}" th:object="${buy}" method="post">
+                    <input type="text" th:field="*{amount}">
+                    <div>
+                        <p>Data podpisania umowy</p>
+                        <input type="date" th:field="*{date}">
+                    </div>
+                    <input type="submit">
+                </form>
+            </div>
+        </td>
+
+
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
