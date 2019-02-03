@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Car details</title>
+</head>
+<body>
+<h1>Car details</h1>
+<table th:object="${car}">
+    <tr>
+        <th>Property</th>
+        <th>Value</th>
+    </tr>
+    <tr>
+        <td>Id</td>
+        <td th:text="*{id}"></td>
+    </tr>
+    <tr>
+        <td>Date</td>
+        <td th:text="*{date}"></td>
+    </tr>
+    <tr>
+        <td>Model</td>
+        <td th:text="*{model}"></td>
+    </tr>
+    <tr>
+        <td>Assistant</td>
+        <td th:text="*{nrOc}"></td>
+    </tr>
+    <tr>
+        <td>Register number</td>
+        <td th:text="*{nrRegister}"></td>
+    </tr>
+    <tr>
+        <td>Fuel type</td>
+        <td th:text="*{fuelType}"></td>
+    </tr>
+    <tr>
+        <td>Mileage</td>
+        <td th:text="*{mileage}"></td>
+    </tr>
+    <tr>
+        <td>Engine</td>
+        <td th:text="*{engine}"></td>
+    </tr>
+    <tr>
+        <td>Horse power</td>
+        <td th:text="*{power}"></td>
+    </tr>
+    <tr>
+        <td>Gear box</td>
+        <td th:text="*{gearBox}"></td>
+    </tr>
+    <tr>
+        <td>Description</td>
+        <td th:text="*{description}"></td>
+    </tr>
+    <tr>
+        <td>Amount of test drives</td>
+        <td th:text="*{testDriveAmount}"></td>
+    </tr>
+    <tr>
+        <td>Owner</td>
+        <td th:text="*{owner}"></td>
+    </tr>
+    <tr>
+        <td>
+            <a th:href="@{/sellCar/{carId}(carId=${car.id})}"
+               th:text="Sell"/></td>
+    </tr>
+</table>
+</body>
+</html>

@@ -7,9 +7,9 @@ import java.io.Serializable;
 @MappedSuperclass
 @Data
 public abstract class BaseModel implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
 
     @Version

@@ -1,5 +1,6 @@
 package com.example.car_dealer.service;
 
+import com.example.car_dealer.model.Car;
 import com.example.car_dealer.model.Worker;
 import com.example.car_dealer.repository.WorkerRepository;
 import org.hibernate.jdbc.Work;
