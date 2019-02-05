@@ -1,5 +1,6 @@
 package com.example.car_dealer.controller;
 
+import com.example.car_dealer.dtos.BuyDto;
 import com.example.car_dealer.model.Buy;
 import com.example.car_dealer.model.Car;
 import com.example.car_dealer.service.CarService;
@@ -7,9 +8,7 @@ import com.example.car_dealer.service.PurchaseService;
 import com.example.car_dealer.service.SellingService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Comparator;
 import java.util.List;
@@ -60,6 +59,14 @@ public class CarDataController {
 
         return "waitingCars";
 
+    }
+
+    @PostMapping("/waitingCars/accept")
+    public String acceptStatus(   @RequestParam Long id){
+
+
+        purchaseService.changeCarStatus(id,1L);
+        return "redirect:/cars";
     }
 
 }

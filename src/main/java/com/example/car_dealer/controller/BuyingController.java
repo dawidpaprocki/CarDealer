@@ -61,7 +61,6 @@ public class BuyingController {
         Date parse = simpleDateFormat.parse(buyDto.getDate());
 
         Worker worker = new Worker();
-        worker.setId(1L);
         worker.setName("Name");
         workerService.addWorkerToDB(worker);
         purchaseService.buyCar(foundCar.get(), foundCustomer.get(), buyDto.getAmount(), worker, parse);
