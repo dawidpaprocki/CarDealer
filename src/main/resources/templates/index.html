@@ -7,8 +7,8 @@
 <body>
 <h1>Strona główna</h1>
 
-<div th:if="${sent != null}">
-    <p th:text="${sent}"></p>
+<div th:if="${feedback != null}">
+    <p th:text="${feedback}"></p>
 </div>
 <table>
     <tbody>
@@ -23,6 +23,9 @@
     </tr>
     <tr>
         <td><a th:href="@{/cars/waitingCarsSell/}">Auta oczekające na potwierdzenie sprzedaży</a></td>
+    </tr>
+    <tr>
+        <td><a th:href="@{/addWorker/}">Dodanie Parcownika</a></td>
     </tr>
     </tbody>
 </table>
