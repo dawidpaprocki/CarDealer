@@ -128,7 +128,7 @@ public class DefaultSellingServiceTest {
 
         when(sellRepository.findById(any())).thenReturn(Optional.of(sell));
         when(carRepository.findById(any())).thenReturn(Optional.of(car));
-        defaultSellingService.carStatus(1L,1L);
+        defaultSellingService.changeCarStatus(1L,1L);
 
         ArgumentCaptor<Sell> carArgumentCaptorSell = ArgumentCaptor.forClass(Sell.class);
         verify(sellRepository).save(carArgumentCaptorSell.capture());
@@ -142,7 +142,7 @@ public class DefaultSellingServiceTest {
 
         when(sellRepository.findById(any())).thenReturn(Optional.of(sell));
         when(carRepository.findById(any())).thenReturn(Optional.of(car));
-        defaultSellingService.carStatus(1L,0L);
+        defaultSellingService.changeCarStatus(1L,0L);
 
         ArgumentCaptor<Sell> carArgumentCaptorSell = ArgumentCaptor.forClass(Sell.class);
         verify(sellRepository).save(carArgumentCaptorSell.capture());

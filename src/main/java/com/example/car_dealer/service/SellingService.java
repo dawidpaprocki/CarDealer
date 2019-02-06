@@ -1,11 +1,14 @@
 package com.example.car_dealer.service;
 
-import com.example.car_dealer.model.*;
-import org.springframework.stereotype.Service;
+import com.example.car_dealer.model.Buy;
+import com.example.car_dealer.model.Customer;
+import com.example.car_dealer.model.Sell;
+import com.example.car_dealer.model.Worker;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 
 public interface    SellingService {
@@ -13,8 +16,9 @@ public interface    SellingService {
 
     @Transactional
     Sell sellCar(Long carId, Customer customer, BigDecimal price, Worker worker, Date date);
+    List<Sell> carWaitingForAccept();
 
-
-    Sell carStatus(Long sellId, Long accept);
+    Sell changeCarStatus(Long sellId, Long sellStatus);
+    List<Sell> carAccepted();
 
 }

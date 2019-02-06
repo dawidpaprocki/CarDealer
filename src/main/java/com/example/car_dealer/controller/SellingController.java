@@ -1,16 +1,19 @@
 package com.example.car_dealer.controller;
 
+import com.example.car_dealer.dtos.SellDto;
 import com.example.car_dealer.model.Car;
 import com.example.car_dealer.model.Customer;
 import com.example.car_dealer.model.Sell;
 import com.example.car_dealer.model.Worker;
 import com.example.car_dealer.service.CarService;
-import com.example.car_dealer.service.DefaultSellingService;
+import com.example.car_dealer.service.CustomerService;
 import com.example.car_dealer.service.SellingService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,12 +25,14 @@ public class SellingController {
 
     private final CarService carService;
     private final SellingService sellingService;
-    private final DefaultSellingService defaultSellingService;
+    private final CustomerService customerService;
+    @Autowired
+    private HttpSession httpSession;
 
-    public SellingController(CarService carService, SellingService sellingService, DefaultSellingService defaultSellingService) {
+    public SellingController(CarService carService, SellingService sellingService,CustomerService customerService1) {
         this.carService = carService;
         this.sellingService = sellingService;
-        this.defaultSellingService = defaultSellingService;
+        this.customerService = customerService1;
     }
 
     @GetMapping("/{id}")
@@ -40,30 +45,48 @@ public class SellingController {
         } else {
             return "redirect:cars/";
         }
-        model.addAttribute("sell", new Sell());
-        model.addAttribute("car", car);
+
+        Long gettingCarId = car.getId();
+        String gettingCarModel = car.getModel();
+
+        model.addAttribute("sell", new SellDto());
+        model.addAttribute("carId", gettingCarId);
+        httpSession.setAttribute("carId", gettingCarId);
+        model.addAttribute("carModel", gettingCarModel);
         model.addAttribute("customer", new Customer());
-        model.addAttribute("date", new Date());
         return "sellCar";
     }
 
+
+
+
     @PostMapping("/sell")
     public String sellingCarForAcceptance(
-            @ModelAttribute("car") Car car,
+            @ModelAttribute("carModel") String carModel,
             @ModelAttribute("customer") Customer customer,
-            @ModelAttribute("sell") Sell sell,
-            @ModelAttribute("date") String date
+            @ModelAttribute("sell") SellDto sellDto,
+            Model model
     ) throws ParseException {
-        Date parsedDate;
-        String pattern = "yyyy-MM-dd";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
-            parsedDate = simpleDateFormat.parse(date);
+        Customer addNewCustomer = new Customer();
+        addNewCustomer.setPesel(customer.getPesel());
+        addNewCustomer.setAdress(customer.getAdress());
+        addNewCustomer.setName(customer.getName());
+        addNewCustomer.setSurName(customer.getSurName());
+        addNewCustomer.setNip(customer.getNip());
 
-        sell.setCustomer(customer);
-        sell.setAcceptStatus(0L);
-        defaultSellingService.sellCar(car.getId(), customer, sell.getAmount(), new Worker(), parsedDate);
-        return "redirect:/cars";
+        customerService.addCustomer(addNewCustomer);
+        Customer customer1 = customerService.getCustomerById(addNewCustomer.getId()).get();
+
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date parse = simpleDateFormat.parse(sellDto.getDate());
+
+        long carId = (long) httpSession.getAttribute("carId");
+
+        sellingService.sellCar(carId, customer1, sellDto.getAmount(), new Worker(), parse);
+        model.addAttribute("sent", "Wysłana prośba o akceptacje");
+        return "index";
     }
 
 
