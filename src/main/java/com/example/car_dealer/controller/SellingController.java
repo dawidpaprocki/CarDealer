@@ -70,7 +70,7 @@ public class SellingController {
 
         Customer addNewCustomer = new Customer();
         addNewCustomer.setPesel(customer.getPesel());
-        addNewCustomer.setAdress(customer.getAdress());
+        addNewCustomer.setAddress(customer.getAddress());
         addNewCustomer.setName(customer.getName());
         addNewCustomer.setSurName(customer.getSurName());
         addNewCustomer.setNip(customer.getNip());
@@ -85,7 +85,7 @@ public class SellingController {
         long carId = (long) httpSession.getAttribute("carId");
 
         sellingService.sellCar(carId, customer1, sellDto.getAmount(), new Worker(), parse);
-        model.addAttribute("sent", "Wysłana prośba o akceptacje");
+        model.addAttribute("feedback", "Wysłano prośbę o akceptacje");
         return "index";
     }
 

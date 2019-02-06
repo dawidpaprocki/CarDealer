@@ -11,7 +11,7 @@ import javax.persistence.Entity;
 public class Customer extends BaseModel {
     private String name;
     private String surName;
-    private String adress;
+    private String address;
     private String nip;
     private String pesel;
 

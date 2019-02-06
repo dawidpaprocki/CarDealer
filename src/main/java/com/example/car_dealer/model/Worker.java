@@ -13,7 +13,7 @@ public class Worker  extends BaseModel{
 
     private String name;
     private String surName;
-    private String adress;
+    private String address;
     private Date hiredDate;
 //    @ElementCollection(fetch = FetchType.EAGER)
 //    @CollectionTable(name = "UserRole", joinColumns = @JoinColumn(name = "userId"))
