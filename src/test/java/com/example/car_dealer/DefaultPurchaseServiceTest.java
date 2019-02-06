@@ -79,8 +79,7 @@ public class DefaultPurchaseServiceTest {
         assertEquals(customer.getId(), carArgumentCaptorBuy.getValue().getCustomer().getId());
         assertEquals(worker.getId(), carArgumentCaptorBuy.getValue().getWorker().getId());
         assertEquals(car.getId(), carArgumentCaptorBuy.getValue().getCar().getId());
-//        String string = carArgumentCaptorSell.getValue().getDate().toString();
-//        Date parsedDate1 = simpleDateFormat.parse(string);
+
 
 
     }

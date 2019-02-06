@@ -31,6 +31,7 @@ public class DefaultPurchaseService implements PurchaseService {
         buyCar.setDate(date);
         buyCar.setCustomer(customer);
         buyCar.setWorker(worker);
+        buyCar.setAcceptStatus(0L);
 
         return buyRepository.save(buyCar);
     }
@@ -54,6 +55,11 @@ public class DefaultPurchaseService implements PurchaseService {
         carForBuy.setAcceptStatus(buyStatus);
 
         return buyRepository.save(carForBuy);
+    }
+
+    @Override
+    public List<Buy> carAccepted() {
+        return buyRepository.findByAcceptStatus(1L);
     }
 
 

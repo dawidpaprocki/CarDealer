@@ -16,5 +16,6 @@ public interface PurchaseService {
     Buy buyCar(Car car, Customer customer, BigDecimal price, Worker worker, Date date) ;
     List<Buy> carWaitingForAccept();
     Buy changeCarStatus(Long buyId, Long accept);
+    List<Buy> carAccepted();
 
 }
