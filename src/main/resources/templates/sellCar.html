@@ -7,80 +7,79 @@
 
 <body>
 <h1>Car details</h1>
-<table th:object="${car}">
+<table>
     <tr>
         <th>Car Details</th>
         <th>Value</th>
     </tr>
     <tr>
         <td>Id</td>
-        <td th:text="*{id}"></td>
+        <td th:text="${carId}"></td>
     </tr>
     <tr>
         <td>Model</td>
-        <td th:text="*{model}"></td>
-    </tr>
-    <tr>
-        <td>Owner</td>
-        <td th:text="*{owner}"></td>
+        <td th:text="${carModel}"></td>
     </tr>
 
 
 </table>
+    <form th:action="@{/sellCar/sell}" th:object="${customer}" method="post">
+        <table>
+            <tr>
+                <td>Customer Name</td>
+                <td>
+                    <input type="text" th:field="*{name}">
 
-<form th:action="@{/sellCar/sell}" th:object="${customer}" method="post">
-    <table>
-        <tr>
-            <td>Customer Name</td>
-            <td>
-                <input type="text" th:field="*{name}">
+                </td>
+            </tr>
+            <tr>
+                <td>Customer Last Name</td>
+                <td>
+                    <input type="text" th:field="*{surName}">
 
-            </td>
-        </tr>
-        <tr>
-            <td>Customer Last Name</td>
-            <td>
-                <input type="text" th:field="*{surName}">
+                </td>
+            </tr>
+            <tr>
+                <td>Adress</td>
+                <td>
+                    <input type="text" th:field="*{adress}">
 
-            </td>
-        </tr>
-        <tr>
-            <td>Adress</td>
-            <td>
-                <input type="text" th:field="*{adress}">
+                </td>
+            <tr>
 
-            </td>
-        <tr>
+            <tr>
+                <td>Nip</td>
+                <td>
+                    <input type="text" th:field="*{nip}">
 
-        <tr>
-            <td>Nip</td>
-            <td>
-                <input type="text" th:field="*{nip}">
+                </td>
+            <tr>
+            <tr>
+                <td>pesel</td>
+                <td>
+                    <input type="text" th:field="*{pesel}">
 
-            </td>
-        <tr>
-        <tr>
-            <td>pesel</td>
-            <td>
-                <input type="text" th:field="*{pesel}">
+                </td>
+            <tr>
 
-            </td>
-        <tr>
+            <tr>
+                <td>price</td>
+                <td>
+                    <input type="text" th:field="${sell.amount}">
+                </td>
+            <tr>
 
-        <tr th:object="${sell}" >
-            <td>price</td>
-            <td>
-                <input type="text" th:field="*{amount}">
-            </td>
-        <tr>
-
-        <input th:object="${date}" type="text" th:field="*{date}">
+                <div>
+                    <p>Data podpisania umowy</p>
+                    <input type="date" th:field="${sell.date}">
+                </div>
 
 
-        <tr>
-            <td colspan="2"><input type="submit"></td>
-        </tr>
-    </table>
-</form>
+            <tr>
+                <td colspan="2"><input type="submit"></td>
+            </tr>
+        </table>
+    </form>
+
 </body>
 </html>

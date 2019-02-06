@@ -6,6 +6,10 @@
 </head>
 <body>
 <h1>Strona główna</h1>
+
+<div th:if="${sent != null}">
+    <p th:text="${sent}"></p>
+</div>
 <table>
     <tbody>
     <tr>
@@ -15,10 +19,10 @@
         <td><a th:href="@{/buyCar/}">Kup Auto</a></td>
     </tr>
     <tr>
-        <td><a th:href="@{/cars/waitingCars/}">Auta czekające na potwierdzenie </a></td>
+        <td><a th:href="@{/cars/waitingCarsBuy/}">Auta oczekające na potwierdzenie zakupu</a></td>
     </tr>
     <tr>
-        <td>&nbsp;</td>
+        <td><a th:href="@{/cars/waitingCarsSell/}">Auta oczekające na potwierdzenie sprzedaży</a></td>
     </tr>
     </tbody>
 </table>
