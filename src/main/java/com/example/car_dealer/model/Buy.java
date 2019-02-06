@@ -3,6 +3,7 @@ package com.example.car_dealer.model;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -15,13 +16,13 @@ import java.util.Date;
 public class Buy extends BaseModel {
     private Date date;
     private BigDecimal amount;
-    @ManyToOne
-    @JoinColumn(name = "userId")
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "CustomerId")
     private Customer customer;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "carId")
     private Car car;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "workerId")
     private Worker worker;
     private Long acceptStatus;

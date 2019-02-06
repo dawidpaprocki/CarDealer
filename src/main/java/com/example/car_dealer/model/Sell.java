@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -17,14 +18,14 @@ public class Sell extends BaseModel {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
     private BigDecimal amount;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "customerId")
     private Customer customer;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "carId")
     private Car car;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "workerId")
     private Worker worker;
-    private Long AcceptStatus;
+    private Long acceptStatus;
 }
