@@ -1,8 +1,8 @@
 package com.example.car_dealer.controller;
 
-import com.example.car_dealer.dtos.BuyDto;
 import com.example.car_dealer.model.Buy;
 import com.example.car_dealer.model.Car;
+import com.example.car_dealer.model.Sell;
 import com.example.car_dealer.service.CarService;
 import com.example.car_dealer.service.PurchaseService;
 import com.example.car_dealer.service.SellingService;
@@ -32,12 +32,18 @@ public class CarDataController {
 
     @GetMapping
     public String printAvailableCars(Model model) {
-        List<Car> cars = carService.printNotSoldCars();
+        List<Buy> boughtCars = purchaseService.carAccepted();
+        List<Car> cars = boughtCars
+                .stream()
+                .map(Buy::getCar)
+                .filter(car -> car.getSold() == 0)
+                .collect(Collectors.toList());
         cars.sort(Comparator.comparing(Car::getId));
         model.addAttribute("carList", cars);
 
         return "cars";
     }
+
 
     @RequestMapping("/{id}")
     public String getCar(
@@ -50,23 +56,41 @@ public class CarDataController {
         return "carDetails";
     }
 
-    @RequestMapping("/waitingCars")
-    public String waitingCars(Model model){
+    @RequestMapping("/waitingCarsBuy")
+    public String waitingCarsToBuy(Model model) {
         List<Buy> buysToAccept = purchaseService.carWaitingForAccept();
         List<Car> waitingCarsList = buysToAccept.stream().map(Buy::getCar).collect(Collectors.toList());
-        model.addAttribute("waitingBuyList",buysToAccept);
-        model.addAttribute("waitingCarList",waitingCarsList);
+        model.addAttribute("waitingBuyList", buysToAccept);
+        model.addAttribute("waitingCarList", waitingCarsList);
 
-        return "waitingCars";
+        return "waitingCarsBuy";
 
     }
 
-    @PostMapping("/waitingCars/accept")
-    public String acceptStatus(   @RequestParam Long id){
+    @PostMapping("/waitingCarsBuy/accept")
+    public String acceptStatusToBuy(@RequestParam Long id) {
 
 
-        purchaseService.changeCarStatus(id,1L);
+        purchaseService.changeCarStatus(id, 1L);
         return "redirect:/cars";
     }
+
+    @RequestMapping("/waitingCarsSell")
+    public String waitingCarsForSell(Model model) {
+        List<Sell> sellsToAccept = sellingService.carWaitingForAccept();
+        List<Car> waitingCarsList = sellsToAccept.stream().map(Sell::getCar).collect(Collectors.toList());
+        model.addAttribute("waitingSellList", sellsToAccept);
+        model.addAttribute("waitingCarList", waitingCarsList);
+
+        return "waitingCarsSell";
+
+    }
+
+    @PostMapping("/waitingCarsSell/accept")
+    public String acceptStatusForSell(@RequestParam Long id) {
+        sellingService.changeCarStatus(id, 1L);
+        return "redirect:/cars";
+    }
+
 
 }
