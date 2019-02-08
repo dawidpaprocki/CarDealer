@@ -49,7 +49,7 @@ public class BuyingController {
 
     @PostMapping("/bought")
     public String ToCheck(
-            @ModelAttribute("buy") BuyDto buyDto
+            @ModelAttribute("buy") BuyDto buyDto, Model model
     ) throws ParseException {
         long carId = (long) httpSession.getAttribute("carId");
         long customerId = (long) httpSession.getAttribute("customerId");
@@ -61,9 +61,10 @@ public class BuyingController {
         Date parse = simpleDateFormat.parse(buyDto.getDate());
 
         Worker worker = new Worker();
-        worker.setName("Name");
+        worker.setName("Namse");
         workerService.addWorkerToDB(worker);
         purchaseService.buyCar(foundCar.get(), foundCustomer.get(), buyDto.getAmount(), worker, parse);
+        model.addAttribute("feedback", "Wysłano prośbę o akceptacje");
         return "index";
 
     }
@@ -89,7 +90,7 @@ public class BuyingController {
     ) {
         Customer addNewCustomer = new Customer();
         addNewCustomer.setPesel(customer.getPesel());
-        addNewCustomer.setAdress(customer.getAdress());
+        addNewCustomer.setAddress(customer.getAddress());
         addNewCustomer.setName(customer.getName());
         addNewCustomer.setSurName(customer.getSurName());
         addNewCustomer.setNip(customer.getNip());

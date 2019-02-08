@@ -68,11 +68,12 @@ public class CarDataController {
     }
 
     @PostMapping("/waitingCarsBuy/accept")
-    public String acceptStatusToBuy(@RequestParam Long id) {
+    public String acceptStatusToBuy(@RequestParam Long id, Model model) {
 
 
         purchaseService.changeCarStatus(id, 1L);
-        return "redirect:/cars";
+        model.addAttribute("feedback", "zaakceptowano zakup");
+        return "/cars";
     }
 
     @RequestMapping("/waitingCarsSell")
@@ -87,9 +88,10 @@ public class CarDataController {
     }
 
     @PostMapping("/waitingCarsSell/accept")
-    public String acceptStatusForSell(@RequestParam Long id) {
+    public String acceptStatusForSell(@RequestParam Long id,Model model) {
         sellingService.changeCarStatus(id, 1L);
-        return "redirect:/cars";
+        model.addAttribute("feedback", "zaakceptowano sprzedaż");
+        return "/cars";
     }
 
 

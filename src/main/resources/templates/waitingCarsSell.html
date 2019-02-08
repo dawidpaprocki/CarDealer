@@ -2,43 +2,36 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Cars</title>
+    <title>Sell Cars</title>
 </head>
 <body>
-<h1>Cars</h1>
+<h1>Waiting list of cars for sell</h1>
 <table border="1">
 
     <tr>
-        <th>ID</th>
-        <th>Date</th>
-        <th>Model</th>
-        <th>Assistant</th>
-        <th>Register number</th>
-        <th>Fuel type</th>
-        <th>Mileage</th>
-        <th>Engine</th>
-        <th>Horse power</th>
-        <th>Gear box</th>
-        <th>Description</th>
-        <th>Amount of test drives</th>
-        <th>Owner</th>
+        <th>Date of Purchase</th>
+        <th>Price</th>
+        <th>Worker</th>
+        <th>Customer details</th>
+        <th>Car model</th>
+        <th>Car ID</th>
     </tr>
-    <tr th:each="buy : ${waitingSellList}">
-        <td th:text="${buy.date}"></td>
-        <td th:text="${buy.amount}"></td>
-        <td th:text="${buy.worker.getName()+' '+ buy.worker.getSurName()}"></td>
-        <td th:text="${buy.getCustomer().getName()+ ' ' + buy.getCustomer().surName}"></td>
-        <td th:text="${buy.getCar().getModel()}">
-        <td th:text="${buy.getCar().getId()}">
+    <tr th:each="sell : ${waitingSellList}">
+        <td th:text="${#dates.format(sell.date, 'yyyy-MM-dd')}" ></td>
+        <td th:text="${sell.amount}"></td>
+        <td th:text="${sell.worker.getName()+' '+ sell.worker.getSurName()}"></td>
+        <td th:text="${sell.getCustomer().getName()+ ' ' + sell.getCustomer().surName}"></td>
+        <td th:text="${sell.getCar().getModel()}">
+        <td th:text="${sell.getCar().getId()}">
         </td>
         <td>
-            <a th:href="@{/cars/{id}(id=${buy.getCar().getId()})}" th:text="Details"/>
+            <a th:href="@{/cars/{id}(id=${sell.getCar().getId()})}" th:text="Details"/>
         </td>
         <td>
             <form th:action="@{/cars/waitingCars/accept}" method="post">
-                <input type="hidden" th:name="id" th:value="${buy.getId()}"/>
+                <input type="hidden" th:name="id" th:value="${sell.getId()}"/>
 
-                <input type="submit" value="Akceptuj">
+                <input type="submit" value="Accept">
             </form>
         </td>
 

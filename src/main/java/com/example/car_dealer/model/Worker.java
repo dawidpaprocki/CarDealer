@@ -15,9 +15,6 @@ public class Worker  extends BaseModel{
     private String surName;
     private String address;
     private Date hiredDate;
-//    @ElementCollection(fetch = FetchType.EAGER)
-//    @CollectionTable(name = "UserRole", joinColumns = @JoinColumn(name = "userId"))
-//    @Column(name = "roleName")
-//    private List<String> roles = new ArrayList<>();
+    private String role;
 
 }
