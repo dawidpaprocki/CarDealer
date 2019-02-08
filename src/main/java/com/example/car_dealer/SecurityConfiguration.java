@@ -42,7 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/cars/waitingCarsSell/").hasRole("MANAGER")
                 .antMatchers("/cars/").hasRole("MANAGER")
                 .antMatchers("/cars/waitingCarsBuy/").hasRole("MANAGER")
-                .antMatchers("/addWorker/").hasRole("MANAGER")
+//                .antMatchers("/addWorker/").hasRole("MANAGER")
                 .anyRequest().permitAll()
                 .and()
                 .formLogin().defaultSuccessUrl("/")

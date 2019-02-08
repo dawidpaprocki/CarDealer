@@ -7,6 +7,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class DefaultUserService implements UserService {
     private UserRepository userRepository;
+
+    public DefaultUserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     @Override
     public User addUser(User user) {
 

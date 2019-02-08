@@ -2,11 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Buy car</title>
+    <title>Worker</title>
 </head>
 
 <body>
-<h1>Buy car</h1>
+<h1>Add worker</h1>
 
 <form th:action="@{/addWorker/add}" th:object="${worker}" method="post">
     <table>
@@ -41,9 +41,9 @@
         <tr>
             <td>Privileges</td>
             <td>
-                <select name="nazwa" size="w"  th:field="${User.roleName}">
-                    <option>TRADER</option>
-                    <option>Manager</option>
+                <select th:field="${User.roleName}">
+                    <option th:value="TRADER">TRADER</option>
+                    <option th:value="MANAGER">MANAGER</option>
                 </select>
 
             </td>
@@ -51,14 +51,14 @@
         <tr>
             <td>User name</td>
             <td>
-                <input type="date" th:field="${User.userName}">
+                <input type="text" th:field="${User.userName}">
 
             </td>
         <tr>
         <tr>
             <td>User password</td>
             <td>
-                <input type="date" th:field="${User.password}">
+                <input type="text" th:field="${User.password}">
 
             </td>
         <tr>

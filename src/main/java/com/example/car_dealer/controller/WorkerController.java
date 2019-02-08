@@ -56,6 +56,7 @@ public class WorkerController {
         addedUser.setPassword(user.getPassword());
         addedUser.setRoleName(user.getRoleName());
         addedUser.setActive(true);
+        addedUser.setWorker(addedWorker);
         userService.addUser(addedUser);
 
         model.addAttribute("feedback", "Pracownik został dodany");
