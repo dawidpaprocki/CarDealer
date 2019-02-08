@@ -1,8 +1,9 @@
 package com.example.car_dealer.controller;
 
 import com.example.car_dealer.dtos.WorkerDto;
-import com.example.car_dealer.model.Buy;
+import com.example.car_dealer.model.User;
 import com.example.car_dealer.model.Worker;
+import com.example.car_dealer.service.UserService;
 import com.example.car_dealer.service.WorkerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,9 +20,11 @@ import java.util.Date;
 @RequestMapping("/addWorker")
 public class WorkerController {
     private final WorkerService workerService;
+    private final UserService userService;
 
-    public WorkerController(WorkerService workerService) {
+    public WorkerController(WorkerService workerService, UserService userService) {
         this.workerService = workerService;
+        this.userService = userService;
     }
 
     @GetMapping
@@ -29,11 +32,14 @@ public class WorkerController {
             Model model
     ) {
         model.addAttribute("worker", new Worker());
+        model.addAttribute("User", new User());
         return "addWorker";
     }
 
     @PostMapping("/add")
-    public String addWorker(@ModelAttribute("worker") WorkerDto workerDto, Model model) throws ParseException {
+    public String addWorker(@ModelAttribute("worker") WorkerDto workerDto,
+                            @ModelAttribute("user") User user,
+                            Model model) throws ParseException {
         Worker addedWorker = new Worker();
         addedWorker.setName(workerDto.getName());
         addedWorker.setSurName(workerDto.getSurName());
@@ -44,6 +50,14 @@ public class WorkerController {
 
         addedWorker.setHiredDate(parse);
         workerService.addWorkerToDB(addedWorker);
+
+        User addedUser = new User();
+        addedUser.setUserName(user.getUserName());
+        addedUser.setPassword(user.getPassword());
+        addedUser.setRoleName(user.getRoleName());
+        addedUser.setActive(true);
+        userService.addUser(addedUser);
+
         model.addAttribute("feedback", "Pracownik został dodany");
         return "index";
     }
