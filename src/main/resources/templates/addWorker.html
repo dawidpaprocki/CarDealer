@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Worker</title>
+    <style>
+        .fieldError{
+            border-color: #ff0000;
+        }
+    </style>
 </head>
 
 <body>
@@ -13,55 +18,56 @@
         <tr>
             <td>Name</td>
             <td>
-                <input type="text" th:field="*{name}">
-
+                <input type="text" th:field="*{name}"  th:errorClass="fieldError">
+                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>
             </td>
         </tr>
         <tr>
             <td>Last Name</td>
             <td>
-                <input type="text" th:field="*{surName}">
-
+                <input type="text" th:field="*{surName}"  th:errorClass="fieldError">
+                <span th:if="${#fields.hasErrors('surName')}" th:errors="*{surName}"/>
             </td>
         </tr>
         <tr>
             <td>Address</td>
             <td>
-                <input type="text" th:field="*{address}">
-
+                <input type="text" th:field="*{address}" th:errorClass="fieldError">
+                <span th:if="${#fields.hasErrors('address')}" th:errors="*{address}"/>
             </td>
         <tr>
         <tr>
             <td>Hired Date</td>
             <td>
-                <input type="date" th:field="*{hiredDate}">
-
+                <input type="date" th:field="*{hiredDate}" th:errorClass="fieldError">
+                <span th:if="${#fields.hasErrors('hiredDate')}" th:errors="*{hiredDate}"/>
             </td>
         <tr>
-        <tr>
-            <td>Privileges</td>
-            <td>
-                <select th:field="${User.roleName}">
-                    <option th:value="TRADER">TRADER</option>
-                    <option th:value="MANAGER">MANAGER</option>
-                </select>
+        <!--<tr>-->
+            <!--<td>Privileges</td>-->
+            <!--<td>-->
+                <!--<select th:field="${User.roleName}">-->
+                    <!--<option th:value="TRADER">TRADER</option>-->
+                    <!--<option th:value="MANAGER">MANAGER</option>-->
+                <!--</select>-->
 
-            </td>
-        <tr>
-        <tr>
-            <td>User name</td>
-            <td>
-                <input type="text" th:field="${User.userName}">
+            <!--</td>-->
+        <!--<tr>-->
+        <!--<tr>-->
+            <!--<td>User name</td>-->
+            <!--<td>-->
+                <!--<input type="text" th:field="${User.userName}">-->
+                <!--&lt;!&ndash;<span th:if="${#fields.hasErrors('User.userName')}" th:errors="${User.userName}"/>&ndash;&gt;-->
+            <!--</td>-->
+        <!--<tr>-->
+        <!--<tr>-->
+            <!--<td>User password</td>-->
+            <!--<td>-->
+                <!--<input type="text" th:field="${User.password}">-->
+                <!--&lt;!&ndash;<span th:if="${#fields.hasErrors('User.password')}" th:errors="${User.userName}"/>&ndash;&gt;-->
 
-            </td>
-        <tr>
-        <tr>
-            <td>User password</td>
-            <td>
-                <input type="text" th:field="${User.password}">
-
-            </td>
-        <tr>
+            <!--</td>-->
+        <!--<tr>-->
         <tr>
             <td colspan="2"><input type="submit"></td>
         </tr>
