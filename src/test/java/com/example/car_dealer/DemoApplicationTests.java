@@ -37,16 +37,16 @@ public class DemoApplicationTests {
         Assert.assertTrue(carById.get().getId() == 1L);
     }
 
-    @Test
-    public void CarRepositoryFindCarBetweenDate()  throws ParseException{
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date afterDate = dateFormat.parse("1991-01-01");
-        Date beforeDate = dateFormat.parse("2011-01-01");
-        List<Car> allByYearBetween = carRepository.findAllBetweenDates(afterDate, beforeDate);
-        Optional<Long> id = Optional.ofNullable(allByYearBetween.get(0).getId());
-        Assert.assertTrue(id.get() == 1L);
-    }
+//    @Test
+//    public void CarRepositoryFindCarBetweenDate()  throws ParseException{
+//
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        Date afterDate = dateFormat.parse("1991-01-01");
+//        Date beforeDate = dateFormat.parse("2011-01-01");
+//        List<Car> allByYearBetween = carRepository.findAllBetweenDates(afterDate, beforeDate);
+//        Optional<Long> id = Optional.ofNullable(allByYearBetween.get(0).getId());
+//        Assert.assertTrue(id.get() == 1L);
+//    }
 
     @Test
     public void CarRepositoryCarFindCarAvailable(){

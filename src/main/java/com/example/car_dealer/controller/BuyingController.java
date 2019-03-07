@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -112,7 +113,7 @@ public class BuyingController {
 
     @PostMapping("/addCar")
     public String addCar(
-            @ModelAttribute("car") CarDto car,
+            @Valid @ModelAttribute("car") CarDto car,
             Model model
     ) throws ParseException {
         Car boughtCar = new Car();
