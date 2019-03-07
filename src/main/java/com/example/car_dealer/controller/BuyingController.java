@@ -10,6 +10,7 @@ import com.example.car_dealer.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -86,9 +87,13 @@ public class BuyingController {
 
     @PostMapping("/addCustomer")
     public String addCustomer(
-            @ModelAttribute("customer") Customer customer,
+            @Valid  @ModelAttribute("customer") Customer customer,BindingResult bindingResult,
             Model model
     ) {
+        if (bindingResult.hasErrors()) {
+            return "/addCustomer";
+        }
+
         Customer addNewCustomer = new Customer();
         addNewCustomer.setPesel(customer.getPesel());
         addNewCustomer.setAddress(customer.getAddress());
@@ -113,9 +118,12 @@ public class BuyingController {
 
     @PostMapping("/addCar")
     public String addCar(
-            @Valid @ModelAttribute("car") CarDto car,
+            @Valid @ModelAttribute("car") CarDto car,BindingResult bindingResult,
             Model model
     ) throws ParseException {
+        if (bindingResult.hasErrors()) {
+            return "/addCar";
+        }
         Car boughtCar = new Car();
         boughtCar.setDescription(car.getDescription());
         boughtCar.setMileage(car.getMileage());

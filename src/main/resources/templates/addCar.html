@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Add car</title>
+    <style>
+        .fieldError{
+            border-color: #ff0000;
+        }
+    </style>
 </head>
-
 <body>
 <h1>Add car</h1>
 
@@ -13,72 +17,72 @@
         <tr>
             <td>Model</td>
             <td>
-                <input type="text" th:field="*{model}">
-
+                <input type="text" th:field="*{model}" th:errorClass="fieldError">
+                <span th:if="${#fields.hasErrors('model')}" th:errors="*{model}"/>
             </td>
         </tr>
         <tr>
             <td>Production Date</td>
             <td>
-                <input type="date" th:field="*{date}">
-
+                <input type="date" th:field="*{date}" th:errorClass="fieldError">
+                <span th:if="${#fields.hasErrors('date')}" th:errors="*{date}"/>
             </td>
         </tr>
         <tr>
             <td>Nr Oc</td>
             <td>
-                <input type="text" th:field="*{nrOc}">
-
+                <input type="text" th:field="*{nrOc}" th:errorClass="fieldError">
+                <span th:if="${#fields.hasErrors('nrOc')}" th:errors="*{nrOc}"/>
             </td>
         <tr>
 
         <tr>
             <td>Register Number</td>
             <td>
-                <input type="text" th:field="*{nrRegister}">
-
+                <input type="text" th:field="*{nrRegister}" th:errorClass="fieldError">
+                <span th:if="${#fields.hasErrors('nrRegister')}" th:errors="*{nrRegister}"/>
             </td>
         <tr>
         <tr>
             <td>Fuel</td>
             <td>
-                <input type="text" th:field="*{fuelType}">
-
+                <input type="text" th:field="*{fuelType}" th:errorClass="fieldError">
+                <span th:if="${#fields.hasErrors('fuelType')}" th:errors="*{fuelType}"/>
             </td>
         <tr>
         <tr>
             <td>Mileage</td>
             <td>
-                <input type="text" th:field="*{mileage}">
-
+                <input type="text" th:field="*{mileage}" th:errorClass="fieldError">
+                <span th:if="${#fields.hasErrors('mileage')}" th:errors="*{mileage}"/>
             </td>
         <tr>
         <tr>
             <td>Engine type</td>
             <td>
-                <input type="text" th:field="*{engine}">
-
+                <input type="text" th:field="*{engine}" th:errorClass="fieldError">
+                <span th:if="${#fields.hasErrors('engine')}" th:errors="*{engine}"/>
             </td>
         <tr>
         <tr>
             <td>Engine Power</td>
             <td>
-                <input type="text" th:field="*{power}">
-
+                <input type="text" th:field="*{power}" th:errorClass="fieldError">
+                <span th:if="${#fields.hasErrors('power')}" th:errors="*{power}"/>
             </td>
         <tr>
         <tr>
             <td>Gear Box</td>
             <td>
-                <input type="text" th:field="*{gearBox}">
-
+                <input type="text" th:field="*{gearBox}" th:errorClass="fieldError">
+                <span th:if="${#fields.hasErrors('gearBox')}" th:errors="*{gearBox}"/>
             </td>
         <tr>
         <tr>
             <td>Description</td>
             <td>
-                <input type="text" th:field="*{description}">
-
+                <input type="text" th:field="*{description}" th:errorClass="fieldError">
+                <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"/>
             </td>
         <tr>
         <tr>
