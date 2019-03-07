@@ -64,9 +64,10 @@
         <td th:text="*{owner}"></td>
     </tr>
     <tr>
-        <td>
+        <td th:if="sell == null">
             <a th:href="@{/sellCar/{carId}(carId=${car.id})}"
-               th:text="Sell"/></td>
+               th:text="Sell"/>
+        </td>
     </tr>
 </table>
 </body>

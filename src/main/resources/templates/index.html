@@ -5,7 +5,7 @@
     <title>Home</title>
 </head>
 <body>
-<h1>Strona główna</h1>
+<h1>Home page</h1>
 
 <div th:if="${feedback != null}">
     <p th:text="${feedback}"></p>
@@ -13,19 +13,29 @@
 <table>
     <tbody>
     <tr>
-        <td><a th:href="@{/cars/}">Dostepne auta do sprzedazy</a></td>
+        <td><a th:href="@{/cars/}">Available cars for sell</a></td>
     </tr>
     <tr>
-        <td><a th:href="@{/buyCar/}">Kup Auto</a></td>
+        <td><a th:href="@{/buyCar/}">buy car</a></td>
     </tr>
     <tr>
-        <td><a th:href="@{/cars/waitingCarsBuy/}">Auta oczekające na potwierdzenie zakupu</a></td>
+        <td><a th:href="@{/cars/waitingCarsBuy/}">Cars waiting for buy accept</a></td>
     </tr>
     <tr>
-        <td><a th:href="@{/cars/waitingCarsSell/}">Auta oczekające na potwierdzenie sprzedaży</a></td>
+        <td><a th:href="@{/cars/waitingCarsSell/}">Cars waiting to sell accept</a></td>
     </tr>
     <tr>
-        <td><a th:href="@{/addWorker/}">Dodanie Parcownika</a></td>
+        <td><a th:href="@{/addWorker/}">Add Worker</a></td>
+    </tr>
+    <tr>
+        <td><a th:href="@{/users/}">List of users</a></td>
+    </tr>
+    <tr>
+        <td>
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Logout">
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>

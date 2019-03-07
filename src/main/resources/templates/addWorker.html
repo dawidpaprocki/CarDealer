@@ -11,14 +11,14 @@
 <form th:action="@{/addWorker/add}" th:object="${worker}" method="post">
     <table>
         <tr>
-            <td>Customer Name</td>
+            <td>Name</td>
             <td>
                 <input type="text" th:field="*{name}">
 
             </td>
         </tr>
         <tr>
-            <td>Customer Last Name</td>
+            <td>Last Name</td>
             <td>
                 <input type="text" th:field="*{surName}">
 

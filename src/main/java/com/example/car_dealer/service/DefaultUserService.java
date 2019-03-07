@@ -4,6 +4,8 @@ import com.example.car_dealer.model.User;
 import com.example.car_dealer.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DefaultUserService implements UserService {
     private UserRepository userRepository;
@@ -16,5 +18,10 @@ public class DefaultUserService implements UserService {
     public User addUser(User user) {
 
         return userRepository.save(user);
+    }
+
+    @Override
+    public List<User> findUsersInDB() {
+        return userRepository.findAll();
     }
 }

@@ -23,3 +23,4 @@
 /dist/
 /nbdist/
 /.nb-gradle/
+src/test/java/com/example/car_dealer/DefaultCarServiceTest.java

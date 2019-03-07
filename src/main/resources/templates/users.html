@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+<h1>List of Users</h1>
+<table border="1">
+
+    <tr>
+        <th>ID</th>
+        <th>Is Active</th>
+        <th>Worker name</th>
+        <th>Worker surName</th>
+    </tr>
+    <tr th:each="user : ${listOfUsers}">
+        <td th:text="${user.getId()}"></td>
+        <td th:text="${user.getActive()}"></td>
+        <td th:text="${user.getWorker().name}"></td>
+        <td th:text="${user.getWorker().surName}"></td>
+    </tr>
+</table>
+<div>
+    <a th:href="@{/}"
+       th:text="Home"/>
+</div>
+</body>
+</html>
