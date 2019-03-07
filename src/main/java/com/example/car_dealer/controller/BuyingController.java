@@ -51,7 +51,8 @@ public class BuyingController {
 
     @PostMapping("/bought")
     public String ToCheck(
-            @ModelAttribute("buy") BuyDto buyDto, Model model
+            @ModelAttribute("buy") BuyDto buyDto,
+            Model model
     ) throws ParseException {
         long carId = (long) httpSession.getAttribute("carId");
         long customerId = (long) httpSession.getAttribute("customerId");
@@ -118,7 +119,8 @@ public class BuyingController {
 
     @PostMapping("/addCar")
     public String addCar(
-            @Valid @ModelAttribute("car") CarDto car,BindingResult bindingResult,
+            @Valid @ModelAttribute("car") CarDto car,
+            BindingResult bindingResult,
             Model model
     ) throws ParseException {
         if (bindingResult.hasErrors()) {
@@ -136,8 +138,10 @@ public class BuyingController {
         boughtCar.setTestDriveAmount(0L);
         boughtCar.setGearBox(car.getGearBox());
         boughtCar.setSold(0L);
+
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         boughtCar.setDate(simpleDateFormat.parse(car.getDate()));
+
         carService.addCarToDB(boughtCar);
 
         model.addAttribute("customerId", httpSession.getAttribute("customerId"));

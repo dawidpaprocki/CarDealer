@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Buy car</title>
+    <style>
+        .fieldError{
+            border-color: #ff0000;
+        }
+    </style>
 </head>
 
 <body>
@@ -13,37 +18,37 @@
         <tr>
             <td>Customer Name</td>
             <td>
-                <input type="text" th:field="*{name}">
-
+                <input type="text" th:field="*{name}" th:errorClass="fieldError">
+                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>
             </td>
         </tr>
         <tr>
             <td>Customer Last Name</td>
             <td>
-                <input type="text" th:field="*{surName}">
-
+                <input type="text" th:field="*{surName}" th:errorClass="fieldError">
+                <span th:if="${#fields.hasErrors('surName')}" th:errors="*{surName}"/>
             </td>
         </tr>
         <tr>
             <td>Address</td>
             <td>
-                <input type="text" th:field="*{address}">
-
+                <input type="text" th:field="*{address}" th:errorClass="fieldError">
+                <span th:if="${#fields.hasErrors('address')}" th:errors="*{address}"/>
             </td>
         <tr>
 
         <tr>
             <td>Nip</td>
             <td>
-                <input type="text" th:field="*{nip}">
-
+                <input type="text" th:field="*{nip}" th:errorClass="fieldError">
+                <span th:if="${#fields.hasErrors('nip')}" th:errors="*{nip}"/>
             </td>
         <tr>
         <tr>
             <td>pesel</td>
             <td>
-                <input type="text" th:field="*{pesel}">
-
+                <input type="text" th:field="*{pesel}" th:errorClass="fieldError">
+                <span th:if="${#fields.hasErrors('pesel')}" th:errors="*{pesel}"/>
             </td>
         <tr>
 
