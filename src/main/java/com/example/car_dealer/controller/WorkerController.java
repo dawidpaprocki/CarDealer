@@ -34,13 +34,15 @@ public class WorkerController {
             Model model
     ) {
         model.addAttribute("worker", new WorkerDto());
-        model.addAttribute("User", new User());
+        model.addAttribute("user", new User());
         return "addWorker";
     }
 
     @PostMapping("/add")
-    public String addWorker(@Valid @ModelAttribute("worker") WorkerDto workerDto,     BindingResult bindingResultWorker,
-                            @Valid @ModelAttribute("user") User user,     BindingResult bindingResultUser,
+    public String addWorker(@Valid @ModelAttribute("worker") WorkerDto workerDto,
+                            BindingResult bindingResultWorker,
+                            @Valid @ModelAttribute("user") User user,
+                            BindingResult bindingResultUser,
 
                             Model model) throws ParseException {
 
