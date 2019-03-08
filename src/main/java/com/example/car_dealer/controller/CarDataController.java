@@ -48,12 +48,13 @@ public class CarDataController {
     @RequestMapping("/{id}")
     public String getCar(
             @PathVariable("id") Long carId,
-            @RequestParam(value = "sell",required = false) Long sell,
+            @RequestParam(value = "waitingCar",required = false) Long waitingCar,
             Model model) {
         Optional<Car> foundCar = carService.getCarById(carId);
         if (foundCar.isPresent()) {
             model.addAttribute("car", foundCar.get());
         }
+        model.addAttribute("waitingCar",waitingCar);
         return "carDetails";
     }
 

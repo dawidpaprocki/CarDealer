@@ -2,12 +2,11 @@ package com.example.car_dealer.controller;
 
 import com.example.car_dealer.dtos.BuyDto;
 import com.example.car_dealer.dtos.CarDto;
-import com.example.car_dealer.model.Buy;
-import com.example.car_dealer.model.Car;
-import com.example.car_dealer.model.Customer;
-import com.example.car_dealer.model.Worker;
+import com.example.car_dealer.model.*;
 import com.example.car_dealer.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,15 +29,16 @@ public class BuyingController {
     private final PurchaseService purchaseService;
     private final CustomerService customerService;
     private final CarService carService;
-    private final WorkerService workerService;
+    private final UserService userService;
     @Autowired
     private HttpSession httpSession;
 
-    public BuyingController(PurchaseService purchaseService, CustomerService customerService, CarService carService, WorkerService workerService) {
+    public BuyingController(PurchaseService purchaseService, CustomerService customerService, CarService carService, UserService userService) {
         this.purchaseService = purchaseService;
         this.customerService = customerService;
         this.carService = carService;
-        this.workerService = workerService;
+
+        this.userService = userService;
     }
 
     @GetMapping
@@ -61,12 +61,15 @@ public class BuyingController {
         Optional<Customer> foundCustomer = customerService.getCustomerById(customerId);
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date parse = simpleDateFormat.parse(buyDto.getDate());
+        Date paraseStringToData = simpleDateFormat.parse(buyDto.getDate());
 
-        Worker worker = new Worker();
-        worker.setName("Namse");
-        workerService.addWorkerToDB(worker);
-        purchaseService.buyCar(foundCar.get(), foundCustomer.get(), buyDto.getAmount(), worker, parse);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String name = authentication.getName();
+
+        Optional<User> userInDB = userService.findUserInDB(name);
+        Worker activeWorkerGetFromDB = userInDB.get().getWorker();
+
+        purchaseService.buyCar(foundCar.get(), foundCustomer.get(), buyDto.getAmount(), activeWorkerGetFromDB, paraseStringToData);
         model.addAttribute("feedback", "Wysłano prośbę o akceptacje");
         return "index";
 
@@ -103,15 +106,15 @@ public class BuyingController {
         addNewCustomer.setNip(customer.getNip());
         customerService.addCustomer(addNewCustomer);
 
-        Long id = addNewCustomer.getId();
-        String name = addNewCustomer.getName();
+        Long newCustomerId = addNewCustomer.getId();
+        String newCustomerName = addNewCustomer.getName();
 
-        model.addAttribute("customerId", id);
-        model.addAttribute("name", name);
+        model.addAttribute("customerId", newCustomerId);
+        model.addAttribute("customerName", newCustomerName);
         model.addAttribute("buy", new Buy());
 
-        httpSession.setAttribute("customerId", id);
-        httpSession.setAttribute("name", name);
+        httpSession.setAttribute("customerId", newCustomerId);
+        httpSession.setAttribute("customerName", newCustomerName);
 
         return "buyCar";
     }
@@ -145,17 +148,17 @@ public class BuyingController {
         carService.addCarToDB(boughtCar);
 
         model.addAttribute("customerId", httpSession.getAttribute("customerId"));
-        model.addAttribute("name", httpSession.getAttribute("name"));
+        model.addAttribute("customerName", httpSession.getAttribute("customerName"));
 
-        Long id = boughtCar.getId();
-        String carModel = boughtCar.getModel();
+        Long boughtCarId = boughtCar.getId();
+        String boughtCarModel = boughtCar.getModel();
 
-        model.addAttribute("carId", id);
-        model.addAttribute("model", carModel);
+        model.addAttribute("carId", boughtCarId);
+        model.addAttribute("carModel", boughtCarModel);
         model.addAttribute("buy", new Buy());
 
-        httpSession.setAttribute("carId", id);
-        httpSession.setAttribute("model", carModel);
+        httpSession.setAttribute("carId", boughtCarId);
+        httpSession.setAttribute("carModel", boughtCarModel);
 
         return "buyCar";
     }
