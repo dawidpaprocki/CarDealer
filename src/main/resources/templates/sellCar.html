@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Car details</title>
+    <style>
+        .fieldError{
+            border-color: #ff0000;
+        }
+    </style>
 </head>
 
 <body>
@@ -23,55 +28,57 @@
 
 
 </table>
-    <form th:action="@{/sellCar/sell}" th:object="${customer}" method="post">
+    <form th:action="@{/sellCar/sell}"  method="post">
         <table>
             <tr>
                 <td>Customer Name</td>
                 <td>
-                    <input type="text" th:field="*{name}">
-
+                    <input type="text" th:field="${customer.name}" th:errorClass="fieldError">
+                    <span th:if="${#fields.hasErrors('customer.name')}" th:errors="${customer.name}"/>
                 </td>
             </tr>
             <tr>
                 <td>Customer Last Name</td>
                 <td>
-                    <input type="text" th:field="*{surName}">
-
+                    <input type="text" th:field="${customer.surName}" th:errorClass="fieldError">
+                    <span th:if="${#fields.hasErrors('customer.surName')}" th:errors="${customer.surName}"/>
                 </td>
             </tr>
             <tr>
                 <td>Address</td>
                 <td>
-                    <input type="text" th:field="*{address}">
-
+                    <input type="text" th:field="${customer.address}" th:errorClass="fieldError">
+                    <span th:if="${#fields.hasErrors('customer.address')}" th:errors="${customer.address}"/>
                 </td>
             <tr>
 
             <tr>
                 <td>Nip</td>
                 <td>
-                    <input type="text" th:field="*{nip}">
-
+                    <input type="text" th:field="${customer.nip}" th:errorClass="fieldError">
+                    <span th:if="${#fields.hasErrors('customer.nip')}" th:errors="${customer.nip}"/>
                 </td>
             <tr>
             <tr>
                 <td>pesel</td>
                 <td>
-                    <input type="text" th:field="*{pesel}">
-
+                    <input type="text" th:field="${customer.pesel}" th:errorClass="fieldError">
+                    <span th:if="${#fields.hasErrors('customer.pesel')}" th:errors="${customer.pesel}"/>
                 </td>
             <tr>
 
             <tr>
                 <td>price</td>
                 <td>
-                    <input type="text" th:field="${sell.amount}">
+                    <input type="text" th:field="${sell.amount}" th:errorClass="fieldError">
+                    <span th:if="${#fields.hasErrors('sell.amount')}" th:errors="${sell.amount}"/>
                 </td>
             <tr>
 
                 <div>
                     <p>Data podpisania umowy</p>
-                    <input type="date" th:field="${sell.date}">
+                    <input type="date" th:field="${sell.date}" th:errorClass="fieldError">
+                    <span th:if="${#fields.hasErrors('sell.date')}" th:errors="${sell.date}"/>
                 </div>
 
 
