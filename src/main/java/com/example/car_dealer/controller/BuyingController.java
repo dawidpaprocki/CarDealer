@@ -3,23 +3,24 @@ package com.example.car_dealer.controller;
 import com.example.car_dealer.dtos.BuyDto;
 import com.example.car_dealer.dtos.CarDto;
 import com.example.car_dealer.model.*;
-import com.example.car_dealer.service.*;
+import com.example.car_dealer.service.CarService;
+import com.example.car_dealer.service.CustomerService;
+import com.example.car_dealer.service.PurchaseService;
+import com.example.car_dealer.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -88,6 +89,14 @@ public class BuyingController {
         return "addCustomer";
     }
 
+    @RequestMapping("/selectCustomer")
+    public String selectCustomer(Model model) {
+        List<Customer> listOfCustomers = customerService.getListOfCustomers();
+        model.addAttribute("listOfCustomers", listOfCustomers);
+        model.addAttribute("customer", new Customer());
+        return "ourCustomers";
+    }
+
 
     @PostMapping("/addCustomer")
     public String addCustomer(
@@ -119,10 +128,26 @@ public class BuyingController {
         return "buyCar";
     }
 
+    @PostMapping("/selectCustomer")
+    public String selectCustomer(
+            @RequestParam String selectedCustomerName,
+            @RequestParam Long selectedCustomerId,
+            Model model
+    ) {
+        model.addAttribute("customerId", selectedCustomerId);
+        model.addAttribute("customerName", selectedCustomerName);
+        model.addAttribute("buy", new Buy());
+
+        httpSession.setAttribute("customerId", selectedCustomerId);
+        httpSession.setAttribute("customerName", selectedCustomerName);
+
+        return "buyCar";
+    }
+
 
     @PostMapping("/addCar")
     public String addCar(
-            @Valid @ModelAttribute("car") CarDto car,
+            @Valid @ModelAttribute("car") CarDto carDto,
             BindingResult bindingResult,
             Model model
     ) throws ParseException {
@@ -130,20 +155,21 @@ public class BuyingController {
             return "/addCar";
         }
         Car boughtCar = new Car();
-        boughtCar.setDescription(car.getDescription());
-        boughtCar.setMileage(car.getMileage());
-        boughtCar.setEngine(car.getEngine());
-        boughtCar.setFuelType(car.getFuelType());
-        boughtCar.setModel(car.getModel());
-        boughtCar.setNrOc(car.getNrOc());
-        boughtCar.setNrRegister(car.getNrRegister());
-        boughtCar.setPower(car.getPower());
+        boughtCar.setDescription(carDto.getDescription());
+        boughtCar.setMileage(carDto.getMileage());
+        boughtCar.setEngine(carDto.getEngine());
+        boughtCar.setFuelType(carDto.getFuelType());
+        boughtCar.setModel(carDto.getModel());
+        boughtCar.setNrOc(carDto.getNrOc());
+        boughtCar.setNrRegister(carDto.getNrRegister());
+        boughtCar.setPower(carDto.getPower());
         boughtCar.setTestDriveAmount(0L);
-        boughtCar.setGearBox(car.getGearBox());
+        boughtCar.setGearBox(carDto.getGearBox());
         boughtCar.setSold(0L);
+        boughtCar.setOwner(carDto.getOwner());
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        boughtCar.setDate(simpleDateFormat.parse(car.getDate()));
+        boughtCar.setDate(simpleDateFormat.parse(carDto.getDate()));
 
         carService.addCarToDB(boughtCar);
 

@@ -4,6 +4,7 @@ import com.example.car_dealer.model.Customer;
 import com.example.car_dealer.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -36,5 +37,10 @@ public class DefaultCustomerService implements CustomerService {
     @Override
     public Optional<Customer> getCustomerById(Long id) {
        return customerRepository.findById(id);
+    }
+
+    @Override
+    public List<Customer> getListOfCustomers() {
+        return customerRepository.findAll();
     }
 }
