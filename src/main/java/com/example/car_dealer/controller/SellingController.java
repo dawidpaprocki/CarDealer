@@ -3,7 +3,6 @@ package com.example.car_dealer.controller;
 import com.example.car_dealer.dtos.SellDto;
 import com.example.car_dealer.model.Car;
 import com.example.car_dealer.model.Customer;
-import com.example.car_dealer.model.Sell;
 import com.example.car_dealer.model.Worker;
 import com.example.car_dealer.service.CarService;
 import com.example.car_dealer.service.CustomerService;

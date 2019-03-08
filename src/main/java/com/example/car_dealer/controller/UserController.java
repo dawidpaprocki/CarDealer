@@ -1,7 +1,6 @@
 package com.example.car_dealer.controller;
 
 import com.example.car_dealer.model.User;
-import com.example.car_dealer.model.Worker;
 import com.example.car_dealer.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
