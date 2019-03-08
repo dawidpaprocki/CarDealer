@@ -11,15 +11,16 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
-@Entity
 @Data
-@NoArgsConstructor
 public class SellDto extends BaseModel {
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull
     private String date;
+    @NotNull
+    @Min(value = 1000)
     private BigDecimal amount;
     @ManyToOne
     @JoinColumn(name = "customerId")

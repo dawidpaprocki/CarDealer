@@ -2,8 +2,7 @@ package com.example.car_dealer.dtos;
 
 import lombok.Data;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.Date;
 
 @Data
@@ -17,19 +16,22 @@ public class CarDto {
     @Size(min=1,max =150)
     private String nrOc;
     @NotNull
-    @Size(min=1,max =150)
+    @Min(value = 1)
+    @Max(value = 10)
     private Long nrRegister;
     @NotNull
     @Size(min=1,max =150)
     private String fuelType;
     @NotNull
-    @Size(min=1,max =150)
+    @Min(value = 1)
+    @Max(value = 10)
     private Long mileage;
     @NotNull
     @Size(min=1,max =150)
     private String engine;
     @NotNull
-    @Size(min=1,max =150)
+    @Min(value = 1)
+    @Max(value = 10)
     private Long power;
     @NotNull
     @Size(min=1,max =150)
@@ -37,8 +39,6 @@ public class CarDto {
     @NotNull
     @Size(min=1,max =150)
     private String description;
-    @NotNull
-    @Size(min=1,max =150)
     private Long testDriveAmount;
     private Long sold;
     private String owner;
