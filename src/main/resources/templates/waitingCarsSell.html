@@ -25,7 +25,7 @@
         <td th:text="${sell.getCar().getId()}">
         </td>
         <td>
-            <a th:href="@{/cars/{id}?sell=1(id=${sell.getCar().getId()})}" th:text="Details"/>
+            <a th:href="@{/cars/{id}?waitingCar=1(id=${sell.getCar().getId()})}" th:text="Details"/>
         </td>
         <td>
             <form th:action="@{/cars/waitingCarsSell/accept}" method="post">
