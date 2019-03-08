@@ -11,9 +11,11 @@ import com.example.car_dealer.service.SellingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -29,13 +31,13 @@ public class SellingController {
     @Autowired
     private HttpSession httpSession;
 
-    public SellingController(CarService carService, SellingService sellingService,CustomerService customerService1) {
+    public SellingController(CarService carService, SellingService sellingService, CustomerService customerService1) {
         this.carService = carService;
         this.sellingService = sellingService;
         this.customerService = customerService1;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(value = {"/{id}"})
     public String initCarSellForm(@PathVariable("id") Long carId,
                                   Model model) {
         Optional<Car> foundCar = carService.getCarById(carId);
@@ -58,15 +60,20 @@ public class SellingController {
     }
 
 
-
-
     @PostMapping("/sell")
     public String sellingCarForAcceptance(
+
             @ModelAttribute("carModel") String carModel,
-            @ModelAttribute("customer") Customer customer,
-            @ModelAttribute("sell") SellDto sellDto,
+            @Valid @ModelAttribute("customer") Customer customer,
+            BindingResult bindingResultCustomer,
+            @Valid @ModelAttribute("sell") SellDto sellDto,
+            BindingResult bindingResultSell,
             Model model
     ) throws ParseException {
+
+        if (bindingResultSell.hasErrors() || bindingResultCustomer.hasErrors()) {
+            return "sellCar";
+        }
 
         Customer addNewCustomer = new Customer();
         addNewCustomer.setPesel(customer.getPesel());
