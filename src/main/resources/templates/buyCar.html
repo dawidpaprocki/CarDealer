@@ -15,7 +15,10 @@
 <table>
     <tbody>
     <tr>
-        <a th:href="@{/buyCar/addCustomer}">Add Customer</a></td>
+        <td><a th:href="@{/buyCar/addCustomer}">Add Customer</a></td>
+    </tr>
+    <tr>
+        <td> <a th:href="@{/buyCar/selectCustomer}">Select exist Customer</a></td>
     </tr>
     <tr>
         <td><a th:href="@{/buyCar/addCar}">Add Car </a></td>
@@ -45,7 +48,7 @@
                 <div th:text="${name}"></div>
             </div>
             <div th:if="${customerId == null}">
-                <div>Please add a customer</div>
+                <div>Please add or select customer</div>
             </div>
         </td>
     </tr>

@@ -86,6 +86,15 @@
             </td>
         <tr>
         <tr>
+            <td>Whose car is it?</td>
+            <td>
+                <select th:field="*{owner}">
+                    <option th:value="COMPANY">COMPANY</option>
+                    <option th:value="CLIENT">CLIENT</option>
+                </select>
+            </td>
+        <tr>
+        <tr>
             <td colspan="2"><input type="submit"></td>
         </tr>
     </table>
