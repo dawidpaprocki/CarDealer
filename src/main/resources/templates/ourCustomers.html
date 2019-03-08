@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Customers</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <!--<link rel="stylesheet" type="text/css" href="../static/css/style.css" media="screen" />-->
+</head>
+<body>
+
+<h2>My Customers</h2>
+
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for sur  names.." title="Type in a name">
+
+<table id="myTable">
+    <tr class="header">
+        <th style="width:auto;">Name</th>
+        <th style="width:auto;">Surname</th>
+        <th style="width:auto;">Address</th>
+        <th style="width:auto;">Pesel</th>
+        <th style="width:auto;">NIP</th>
+        <th style="width:auto;">Choice</th>
+    </tr>
+    <tr th:each="customer : ${listOfCustomers}">
+        <td th:text="${customer.name}"></td>
+        <td th:text="${customer.surName}"></td>
+        <td th:text="${customer.address}"></td>
+        <td th:text="${customer.pesel}"></td>
+        <td th:text="${customer.nip}"></td>
+        <td>
+            <form th:action="@{/buyCar/selectCustomer}" method="post">
+                <input type="hidden" th:name="selectedCustomerName" th:value="${customer.name}"/>
+                <input type="hidden" th:name="selectedCustomerId" th:value="${customer.id}"/>
+                <input type="submit" value="Accept">
+            </form>
+        </td>
+    </tr>
+</table>
+
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
