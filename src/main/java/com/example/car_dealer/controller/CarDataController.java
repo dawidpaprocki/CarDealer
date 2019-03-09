@@ -75,7 +75,7 @@ public class CarDataController {
 
         purchaseService.changeCarStatus(id, 1L);
         model.addAttribute("feedback", "zaakceptowano zakup");
-        return "/cars";
+        return "redirect:/cars";
     }
 
     @RequestMapping("/waitingCarsSell")
@@ -93,7 +93,7 @@ public class CarDataController {
     public String acceptStatusForSell(@RequestParam Long id,Model model) {
         sellingService.changeCarStatus(id, 1L);
         model.addAttribute("feedback", "zaakceptowano sprzedaż");
-        return "/cars";
+        return "redirect:/cars";
     }
 
 
